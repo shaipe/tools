@@ -1,4 +1,7 @@
 # filter mac system directory
 
 .DS_Store/
+.DS_Store
 
+# vscode workspace file
+*.code-workspace
