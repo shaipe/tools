@@ -1,0 +1,4 @@
+# filter mac system directory
+
+.DS_Store/
+
