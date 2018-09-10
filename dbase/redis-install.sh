@@ -14,10 +14,10 @@ curl -O http://download.redis.io/releases/redis-4.0.11.tar.gz
 tar zxvf redis-4.0.11.tar.gz    # 解压缩下载文件
 
 # 4. 移动文件
-mv redis-4.0.11 /usr/libexec/redis    # 移动解压缩文件到指定的目录
+mv redis-4.0.11 /usr/local/redis    # 移动解压缩文件到指定的目录
 
 # 5. 进入程序目录
-cd /usr/libexec/redis
+cd /usr/local/redis
 
 # 6. 编译安装
 make
