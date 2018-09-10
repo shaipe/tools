@@ -28,7 +28,11 @@ mkdir -p /etc/redis
 cp redis.conf /etc/redis
 
 # 8. 修改配置文件
-vi /etc/redis/redis.conf # 仅修改： daemonize yes （no-->yes） 在vi下可以使用 /daemonize (向下查找) 或 ?daemonize (向上查找)
+vi /etc/redis/redis.conf # 仅修改： <使用守护进程>daemonize yes （no-->yes） 在vi下可以使用 /daemonize (向下查找) 或 ?daemonize (向上查找)
+# 修改bind 服务器ip地址
+
+# 打开防火墙允许其他服务器访问
+iptables -I INPUT -p tcp --dport 6379 -j ACCEPT # 配置规则
 
 # 9. 启动
 /usr/local/bin/redis-server /etc/redis/redis.conf
@@ -40,11 +44,19 @@ ps -ef| grep redis
 echo "/usr/local/bin/redis-server /etc/redis/redis.conf &" >> /etc/rc.local
 # 开机启动要配置在 rc.local 中，而 /etc/profile 文件，要有用户登录了，才会被执行。
 
+# 12. 其他配置
+redis-cli
+# CONFIG set requirepass ""  # 配置访问密码
+# AUTH password # 本机访问授权
+
+
 # 客户端使用
 # redis-cli
+# redis-cli -h {redis_host} -p {redis_port}
 # >set name david
 # OK
 # >get name
 # "david"
+# quit
 # 关闭客户端
 # redis-cli shutdown
