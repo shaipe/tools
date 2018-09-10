@@ -1,4 +1,4 @@
-cd ~/workspace/documents/
+cd ~/workspace/tools/
 git pull
 git add .
 
