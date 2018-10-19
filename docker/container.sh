@@ -19,7 +19,7 @@ echo 'start creating redis a container '
 # 端口映射 宿主机:容器
 # -v ~/docker/redis/data:/data:rw 映射数据目录 rw 为读写
 # -v ~/docker/redis/conf/redis.conf:/etc/redis/redis.conf挂载配置文件 :ro 为readonly
-# --privileged 给与一些权限
+# --privileged 给与一些权限,需要授权后才能进行登录
 # --name docker-redis 给容器起个名字
 # -d redis redis-server /etc/redis/redis.conf deamon 运行 服务使用指定的配置文件
 docker run \
@@ -42,9 +42,16 @@ mongo
 
 elif [ "$name" == "mariadb" ];
 then
+# /srv/mariadb
+# ~/docker/mariadb 
+# 1. 先不加载这一句,mysql会自动创建一个my.cnf
+# 2. 使用docker cp mariadb3306:/etc/mysql/my.cnf ~/docker mariadb/conf/  把cnf拷贝到本地
+# 3. -v ~/docker/mariadb/conf:/etc/mysql/conf.d \ 添加这一句重新创建容器
+# -e TZ="Asia/Shanghai" \
 echo "start creating mariadb a container";
-sudo docker run  --name mariadb3306 \
+docker run  --name mariadb3306 \
 -p 3306:3306 \
+-v ~/docker/mariadb/conf:/etc/mysql/conf.d \
 -v ~/docker/mariadb/data:/var/lib/mysql \
 -e MYSQL_ROOT_PASSWORD=mysql.root \
 -d mariadb
