@@ -5,3 +5,14 @@
 
 # vscode workspace file
 *.code-workspace
+
+
+# python 
+.idea/
+_pycache_/
+build/
+dist/
+[S]syslogs/
+
+*.spec
+*.pyc
